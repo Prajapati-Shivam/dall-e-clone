@@ -19,9 +19,14 @@ const CreatePost = () => {
 
   const handleSubmit = () => {};
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  };
 
-  const handleSurpriseMe = () => {};
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -38,7 +43,7 @@ const CreatePost = () => {
       <form className="mt-16" onClick={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
-            labelName="Name"
+            labelName="Yikes! What's your name?"
             name="name"
             type="text"
             placeholder="Enter your name"
@@ -46,7 +51,7 @@ const CreatePost = () => {
             onChange={handleChange}
           />
           <FormField
-            labelName="Prompt"
+            labelName="What do you want to think about?"
             name="prompt"
             type="text"
             placeholder="a surrealist dream-like oil painting by Salvador Dalí of a cat playing checkers"
