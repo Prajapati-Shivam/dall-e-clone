@@ -15,12 +15,33 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const generateImage = () => {};
+  const generateImage = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        const response = await fetch('http://localhost:8080/api/v1/create', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: form.prompt })
+        })
+        const data = await response.json();
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (error) {
+        alert(error);
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else {
+      alert("Please enter a prompt");
+    }
+  };
 
   const handleSubmit = () => {};
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSurpriseMe = () => {
@@ -48,7 +69,7 @@ const CreatePost = () => {
             type="text"
             placeholder="Enter your name"
             value={form.name}
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <FormField
             labelName="What do you want to think about?"
@@ -56,7 +77,7 @@ const CreatePost = () => {
             type="text"
             placeholder="a surrealist dream-like oil painting by Salvador Dalí of a cat playing checkers"
             value={form.prompt}
-            onChange={handleChange}
+            handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
           />
@@ -96,7 +117,6 @@ const CreatePost = () => {
           </p>
           <button
             type="submit"
-            onClick={generateImage}
             className="text-white mt-3 bg-blue-500 px-5 py-2.5 font-medium rounded-md text-sm w-full sm:w-auto text-center"
           >
             {loading ? "Sharing..." : "Share with the community"}
