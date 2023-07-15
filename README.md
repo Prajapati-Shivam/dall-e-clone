@@ -1,9 +1,7 @@
 
-# Imagery - DALL·E Clone
+# Imagery - DALL-E Clone
 
-![Imagery](https://github.com/Prajapati-Shivam/dall-e-clone/blob/main/demo.gif)
-
-This repository contains a DALL·E Clone project, which aims to replicate the functionality of OpenAI's DALL·E model. DALL·E is a deep learning model that generates images from textual descriptions.
+This repository contains a DALL-E Clone project, which aims to replicate the functionality of OpenAI's DALL·E model. DALL·E is a deep learning model that generates images from textual descriptions.
 
 ## Features
 
